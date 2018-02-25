@@ -1,3 +1,4 @@
 name: Aaron Jones, Data Scientist
 markdown: kramdown
 permalink: /:year/:month/:day/:title
+highlighter: rouge
