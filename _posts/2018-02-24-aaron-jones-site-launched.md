@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Aaron Jones, Data Scientist, Site Launch"
+title: "Site Launch Announcement"
 date: 2018-02-24
 ---
 

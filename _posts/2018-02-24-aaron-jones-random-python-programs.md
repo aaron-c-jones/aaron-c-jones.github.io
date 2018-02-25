@@ -18,8 +18,8 @@ This program flips a fair coin 100, 500, 1000, and 10000 times to show the conve
 
 The expected value:
 
-$X=Number\ of\ heads$
-$E(X)=\sum_{i=1}^{n}x_{i}p(x_{i})=0*0.5+1*0.5=0.5$
+$$X=Number\ of\ heads$$
+$$E(X)=\sum_{i=1}^{n}x_{i}p(x_{i})=0\times0.5+1\times0.5=0.5$$
 
 ```python
 def coin_toss(number_of_flips):
