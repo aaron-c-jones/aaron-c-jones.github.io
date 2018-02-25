@@ -5,7 +5,6 @@ date: 2018-02-24
 ---
 
 Exploratory work on the Gradient Descent algorithm.
----------------------------------------------------
 
 The Gradient Descent algorithm has the update formulation
 
