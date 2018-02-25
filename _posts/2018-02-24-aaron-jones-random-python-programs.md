@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Random Python Programs"
+date: 2018-02-24
+---
+
 In this post, I am showcasing simple python programs that execute three profound topics: the cumulative moving average, the random walk, and the Fibonacci sequence.
 
 ```python
