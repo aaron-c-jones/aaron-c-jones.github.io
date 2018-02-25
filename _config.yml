@@ -5,6 +5,5 @@ highlighter: rouge
 kramdown:
   input: GFM
   hard_wrap: false
-  syntax_highlighter: rouge
 
 permalink: /:year/:month/:day/:title
