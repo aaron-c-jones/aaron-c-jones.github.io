@@ -156,31 +156,38 @@ withAdapt = gradientDescent(x = mtcars$wt, y = mtcars$hp, nparams = length(coef(
 The coefficients for the R lm command...
 
 ``` r
+
 actualCoef = coef(fit)
 actualCoef
-```
 
     ## (Intercept)          wt 
     ##   -1.820922   46.160050
+
+```
 
 The coefficients from the gradient descent algorithm...
 
 ``` r
 coefFromGD <-c(withAdapt$b0[nrow(withAdapt)], withAdapt$b1[nrow(withAdapt)])
 coefFromGD
-```
 
     ## [1] -1.816788 46.158869
+
+```
+
+    
 
 The lines are partically the same!
 
 ``` r
+
 plotNew <- {plotOrig +
     geom_abline(aes(intercept = coefFromGD[1], slope = coefFromGD[2], colour = 'red'),
                 size = 1.1, linetype = 2) +
     scale_colour_manual(name = '', values = c('blue' = 'blue', 'red' = 'red'),
                         labels = c('Via Closed-Form Solution', 'Via Gradient Descent'))}
 plotNew
+
 ```
 
 ![](/images/2018-02-24-aaron-jones-gradient-descent_files/figure-markdown_github/unnamed-chunk-9-1.png)
