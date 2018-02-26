@@ -178,7 +178,7 @@ coefFromGD
 
     
 
-The lines are partically the same!
+The lines are practically the same!
 
 ``` r
 
