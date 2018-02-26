@@ -49,22 +49,21 @@ $$\frac{dMSE}{d\beta_{1}} = \frac{1}{n}\sum_{i=1}^{n}2*x*(\hat{y} - y)$$
 There is a closed-form solution to this MSE minimization ($\hat{\beta} = (X^{T}X)^{-1}X^{T}Y$), which renders the gradient descent irrelevant. However, using the linear model situation makes for a clean and clear example that can be easily compared against a known solution.
 
 
-The code for the gradient descent is
+The code for the gradient descent:
+
+
+Fitting the linear model via the lm R package (for comparison)...
+
 
 ``` r
+
 require(gridExtra)
 require(ggplot2)
 
 attach(mtcars)
-```
 
-Fitting the linear model via the lm R package (for comparison)...
-
-``` r
 fit <- lm(hp ~ wt, data = mtcars)
-```
 
-``` r
 plotOrig <- {ggplot(mtcars, aes(wt, hp)) +
   geom_point(size = 3) +
   geom_abline(aes(intercept = coef(fit)[1], slope = coef(fit)[2], colour = 'blue'),
@@ -74,17 +73,17 @@ plotOrig <- {ggplot(mtcars, aes(wt, hp)) +
 plotOrig + scale_colour_manual(name = '',
                                values = c('blue' = 'blue'),
                                labels = c('Via Closed-Form Solution'))
+
 ```
 
 ![](/images/2018-02-24-aaron-jones-gradient-descent_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 ``` r
+
 lossFunc <- function(y, yhat, n){ (1 / n) * sum((y - yhat)^2) }
 derivb0 <- function(y, yhat, n){ (1 / n) * sum(2 * (yhat - y)) }
 derivb1 <- function(x, y, yhat, n){ (1 / n) * sum(2 * (yhat - y) * x) }
-```
 
-``` r
 gradientDescent <- function(
   x, y, nparams,
   max_it = 1000000, tol_err = 1e-08, learning_rate = 0.001,
@@ -149,10 +148,9 @@ gradientDescent <- function(
   df = data.frame(b0 = dfb0, b1 = dfb1, mse = dfmse)
   return(df)
 }
-```
 
-``` r
 withAdapt = gradientDescent(x = mtcars$wt, y = mtcars$hp, nparams = length(coef(fit)))
+
 ```
 
 The coefficients for the R lm command...
