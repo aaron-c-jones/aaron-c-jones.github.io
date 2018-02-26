@@ -19,7 +19,7 @@ and
 $$\triangledown f(x) = \text{ Gradient of Cost Function (vector of first derivatives)}$$
 
 
-In the Gradient Descent formula, the epsilon term is an adaptive learning rate that varies depending on the current points proximity to the solution (i.e. the learning rate is large if the current point is far away from the solution). The particular adaptive learning rate used in the code below is from Barzilai and Borwein. It takes the following form
+In the Gradient Descent formula, the epsilon term is an adaptive learning rate that varies depending on the current point's proximity to the solution (i.e. the learning rate is large if the current point is far away from the solution). The particular adaptive learning rate used in the code below is from Barzilai and Borwein. It takes the following form
 
 
 $$\epsilon = \frac{\Delta g(x)^{T} \Delta x}{\Delta g(x)^{T} \Delta g(x)}$$
