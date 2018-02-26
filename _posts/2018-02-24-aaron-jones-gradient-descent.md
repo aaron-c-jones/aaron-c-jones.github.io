@@ -4,10 +4,9 @@ title: "Gradient Descent"
 date: 2018-02-24
 ---
 
-Exploratory work on the Gradient Descent algorithm.
----------------------------------------------------
+Some exploratory work on the gradient descent optimization algorithm:
 
-The Gradient Descent algorithm has the update formulation
+The Gradient Descent algorithm has the update formula
 
 $$x^{(i+1)} = x^{(i)} - \epsilon * \triangledown f(x^{(i)})$$
 
@@ -19,7 +18,8 @@ and
 
 $$\triangledown f(x) = \text{ Gradient of Cost Function }$$
 
-In the function running Gradient Descent, there is an option that evaluates an adaptive learning rate. This particular adaptive learning rate is from Barzilai and Borwein. It takes the following form
+
+In the Gradient Descent formula, the epsilon term is an adaptive learning rate that varies depending on the current points proximity to the solution (i.e. the learning rate is large if the current point is far away from the solution). The particular adaptive learning rate used in the code below is from Barzilai and Borwein. It takes the following form
 
 
 $$\epsilon = \frac{\Delta g(x)^{T} \Delta x}{\Delta g(x)^{T} \Delta g(x)}$$
@@ -32,7 +32,8 @@ and
 
 $$\Delta x = x^{(i+1)} - x^{(i)}$$
 
-Now, let's use gradient descent to solve for the parameters of an OLS regressions. That involves minimizing the MSE or basically, the sum of squared residuals. The formulation of the MSE is
+
+Now, let's use gradient descent to solve for the parameters of an OLS regression. Finding these parameters involves minimizing the mean squared error (MSE) or basically, the sum of squared residuals. The formula for the MSE is
 
 $$MSE = \frac{1}{n}\sum_{i=1}^{n}(y - \hat{y})^2 = \frac{1}{n}\sum_{i=1}^{n}(y - \hat{\beta_{0}} - \hat{\beta_{1}}*x )^2$$
 
@@ -44,7 +45,11 @@ and
 
 $$\frac{dMSE}{d\beta_{1}} = \frac{1}{n}\sum_{i=1}^{n}2*x*(\hat{y} - y)$$
 
-There is a closed-form solution to this MSE minimization ($\hat{\beta} = (X^{T}X)^{-1}X^{T}Y$), which renders the gradient descent not needed. However, using the linear model makes for a clean and clear example that can be easily compared against a known solution.
+
+There is a closed-form solution to this MSE minimization ($\hat{\beta} = (X^{T}X)^{-1}X^{T}Y$), which renders the gradient descent irrelevant. However, using the linear model situation makes for a clean and clear example that can be easily compared against a known solution.
+
+
+The code for the gradient descent is
 
 ``` r
 require(gridExtra)
@@ -52,6 +57,8 @@ require(ggplot2)
 
 attach(mtcars)
 ```
+
+Fitting the linear model via the lm R package (for comparison)...
 
 ``` r
 fit <- lm(hp ~ wt, data = mtcars)
@@ -148,6 +155,8 @@ gradientDescent <- function(
 withAdapt = gradientDescent(x = mtcars$wt, y = mtcars$hp, nparams = length(coef(fit)))
 ```
 
+The coefficients for the R lm command...
+
 ``` r
 actualCoef = coef(fit)
 actualCoef
@@ -156,12 +165,16 @@ actualCoef
     ## (Intercept)          wt 
     ##   -1.820922   46.160050
 
+The coefficients from the gradient descent algorithm...
+
 ``` r
 coefFromGD <-c(withAdapt$b0[nrow(withAdapt)], withAdapt$b1[nrow(withAdapt)])
 coefFromGD
 ```
 
     ## [1] -1.816788 46.158869
+
+The lines are partically the same!
 
 ``` r
 plotNew <- {plotOrig +
