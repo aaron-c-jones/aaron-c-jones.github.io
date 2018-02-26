@@ -5,44 +5,46 @@ date: 2018-02-24
 ---
 
 Exploratory work on the Gradient Descent algorithm.
+---------------------------------------------------
 
 The Gradient Descent algorithm has the update formulation
 
-*x*<sup>(*i* + 1)</sup> = *x*<sup>(*i*)</sup> − *ϵ* \* ▿*f*(*x*<sup>(*i*)</sup>)
+$$x^{(i+1)} = x^{(i)} - \epsilon * \triangledown f(x^{(i)})$$
 
 where
 
-*ϵ* =  Learning Rate 
+$$\epsilon = \text{ Learning Rate }$$
 
 and
 
-▿*f*(*x*)= Gradient of Cost Function 
+$$\triangledown f(x) = \text{ Gradient of Cost Function }$$
 
 In the function running Gradient Descent, there is an option that evaluates an adaptive learning rate. This particular adaptive learning rate is from Barzilai and Borwein. It takes the following form
 
-$$\\epsilon = \\frac{\\Delta g(x)^{T} \\Delta x}{\\Delta g(x)^{T} \\Delta g(x)}$$
+
+$$\epsilon = \frac{\Delta g(x)^{T} \Delta x}{\Delta g(x)^{T} \Delta g(x)}$$
 
 where
 
-*Δ**g*(*x*)= ▿ *f*(*x*<sup>(*i* + 1)</sup>)− ▿ *f*(*x*<sup>(*i*)</sup>)
+$$\Delta g(x) = \triangledown f(x^{(i+1)}) - \triangledown f(x^{(i)})$$
 
 and
 
-*Δ**x* = *x*<sup>(*i* + 1)</sup> − *x*<sup>(*i*)</sup>
+$$\Delta x = x^{(i+1)} - x^{(i)}$$
 
 Now, let's use gradient descent to solve for the parameters of an OLS regressions. That involves minimizing the MSE or basically, the sum of squared residuals. The formulation of the MSE is
 
-$$MSE = \\frac{1}{n}\\sum\_{i=1}^{n}(y - \\hat{y})^2 = \\frac{1}{n}\\sum\_{i=1}^{n}(y - \\hat{\\beta\_{0}} - \\hat{\\beta\_{1}}\*x )^2$$
+$$MSE = \frac{1}{n}\sum_{i=1}^{n}(y - \hat{y})^2 = \frac{1}{n}\sum_{i=1}^{n}(y - \hat{\beta_{0}} - \hat{\beta_{1}}*x )^2$$
 
 and it has the following derivatives
 
-$$\\frac{dMSE}{d\\beta\_{0}} = \\frac{1}{n}\\sum\_{i=1}^{n}2\*(\\hat{y} - y)$$
+$$\frac{dMSE}{d\beta_{0}} = \frac{1}{n}\sum_{i=1}^{n}2*(\hat{y} - y)$$
 
 and
 
-$$\\frac{dMSE}{d\\beta\_{1}} = \\frac{1}{n}\\sum\_{i=1}^{n}2\*x\*(\\hat{y} - y)$$
+$$\frac{dMSE}{d\beta_{1}} = \frac{1}{n}\sum_{i=1}^{n}2*x*(\hat{y} - y)$$
 
-There is a closed-form solution to this MSE minimization ($\\hat{\\beta} = (X^{T}X)^{-1}X^{T}Y$), which renders the gradient descent not needed. However, using the linear model makes for a clean and clear example that can be easily compared against a known solution.
+There is a closed-form solution to this MSE minimization ($\hat{\beta} = (X^{T}X)^{-1}X^{T}Y$), which renders the gradient descent not needed. However, using the linear model makes for a clean and clear example that can be easily compared against a known solution.
 
 ``` r
 require(gridExtra)
