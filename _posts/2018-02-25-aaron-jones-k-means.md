@@ -10,17 +10,17 @@ K-means is a classic clustering algorithm, which means that it falls into the ca
 
 The foundamental goal of K-means is to minimize the within cluster sum of squared residuals (WCSS). The objective function, the function to be minimized, takes the following form
 
-$$WCSS = \sum_{j=1}^{k}\sum_{i=1}^{n_{k}}||x_{i}^{(k)}-\mu_{k}||^{2}$$
+$$WCSS = \sum_{j=1}^{k}\sum_{i=1}^{n_{j}}||x_{i}^{(j)}-\mu_{j}||^{2}$$
 
 where
 
 $$k = \text{the number of clusters}$$
 
-$$n_{k} = \text{the number of observations in the k-th cluster}$$
+$$n_{j} = \text{the number of observations in the j-th cluster}$$
 
 and
 
-$$\mu_{k} = \text{the mean of the k-th cluster}$$
+$$\mu_{j} = \text{the mean of the j-th cluster}$$
 
 The algorithm begins by assigning every observation in the dataset to a cluster at random. Then, the mean of every cluster is computed as well as the distance from each mean to each observation. Next, each observation is reassigned to the cluster to whose center it is closest. Continue this process until the observations don't change clusters.
 
