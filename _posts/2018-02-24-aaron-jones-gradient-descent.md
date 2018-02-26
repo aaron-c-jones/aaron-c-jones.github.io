@@ -168,6 +168,7 @@ actualCoef
 The coefficients from the gradient descent algorithm...
 
 ``` r
+
 coefFromGD <-c(withAdapt$b0[nrow(withAdapt)], withAdapt$b1[nrow(withAdapt)])
 coefFromGD
 
