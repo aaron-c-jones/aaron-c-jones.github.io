@@ -14,13 +14,13 @@ $$WCSS = \sum_{j=1}^{k}\sum_{i=1}^{n_{k}}||x_{i}^{(k)}-\mu_{k}||^{2}$$
 
 where
 
-$$k = the number of clusters$$
+$$k = \text{the number of clusters}$$
 
-$$n_{k} = the number of observations in the k-th cluster$$
+$$n_{k} = \text{the number of observations in the k-th cluster}$$
 
 and
 
-$$\mu_{k} = the mean of the k-th cluster$$
+$$\mu_{k} = \text{the mean of the k-th cluster}$$
 
 The algorithm begins by assigning every observation in the dataset to a cluster at random. Then, the mean of every cluster is computed as well as the distance from each mean to each observation. Next, each observation is reassigned to the cluster to whose center it is closest. Continue this process until the observations don't change clusters.
 
@@ -29,6 +29,7 @@ Given that the numbers of clusters can be determined in advance, the K-means alg
 In the code below, I compare the R function for K-means to my own K-means function.
 
 ``` r
+
 require(ggplot2)
 require(gridExtra)
 require(flexclust)
@@ -36,7 +37,6 @@ require(flexclust)
 data = read.table('/Users/aaronjones/Desktop/k_means_test_data.txt', header = T)
 data = as.matrix(data)
 head(data)
-```
 
     ##            V1        V2
     ## [1,] 5.870368 10.798726
@@ -46,9 +46,12 @@ head(data)
     ## [5,] 4.464312  7.503452
     ## [6,] 5.896090 11.374626
 
+```
+
 Here is the R K-means function.
 
 ``` r
+
 kmR = kmeans(data, 3)
 kmR_plt_df = cbind(data, assign = kmR$cluster)
 kmR_plt = {
@@ -63,6 +66,7 @@ kmR_plt = {
 }
 
 kmR_plt
+
 ```
 
 ![](/images/2018-02-25-aaron-jones-k-means_files/figure-markdown_github/unnamed-chunk-2-1.png)
@@ -70,6 +74,7 @@ kmR_plt
 Here is my own K-means function.
 
 ``` r
+
 KM <- function(X, K, m){
   n = dim(X)[1]
   X = as.data.frame(X)
@@ -125,6 +130,7 @@ KM <- function(X, K, m){
 km = KM(data, 3, 2)
 
 km$Plot
+
 ```
 
 ![](/images/2018-02-25-aaron-jones-k-means_files/figure-markdown_github/unnamed-chunk-3-1.png)
@@ -132,7 +138,9 @@ km$Plot
 Here are the plots from the R function and my own function side-by-side. With the exception of one point, the results are identical.
 
 ``` r
+
 grid.arrange(km$Plot, kmR_plt, ncol = 1)
+
 ```
 
 ![](/images/2018-02-25-aaron-jones-k-means_files/figure-markdown_github/unnamed-chunk-4-1.png)
