@@ -4,23 +4,23 @@ title: "Gradient Descent"
 date: 2018-02-24
 ---
 
-Some exploratory work on the gradient descent optimization algorithm:
+Gradient Descent (aka Steepest Descent) is an algorithm that falls into the branch of mathematics known as numerical analysis, which seeks to find numerical approximations of complex mathematical expressions. More specifically, Gradient Descent is an optimization algorithm that is designed to find the minimum of a function and happens to be extremely popular in machine learning. In machine learning, statistical learning, or predictive modeling (whatever you decide to call it), the principal goal of all algorithms is to have as little error as possible while avoiding overfitting, which means some function quantifying the error needs to be minimized. An iterative algorithm, Gradient Descent takes a series of steps, whose size and direction are determined by the gradient (vector of first derivatives) multipled by a dynamic learning rate, from an initial, predefined point through to the solution (the point of convergence).
 
-The Gradient Descent algorithm has the update formula
+A single interation, call it i+1, has the following formulation
 
 $$x^{(i+1)} = x^{(i)} - \epsilon * \triangledown f(x^{(i)})$$
 
 where
 
-$$\epsilon = \text{ Learning Rate }$$
+$$\epsilon = \text{Learning Rate}$$
 
 and
 
-$$\triangledown f(x) = \text{ Gradient of Cost Function (vector of first derivatives)}$$
+$$\triangledown f(x) = \text{Gradient of Cost Function (vector of first derivatives)}$$
 
+That algorithm continues updating, repeating the above formulation, until either some number of iterations has been run or until some convergence threshold has been reached.
 
-In the Gradient Descent formula, the epsilon term is an adaptive learning rate that varies depending on the current point's proximity to the solution (i.e. the learning rate is large if the current point is far away from the solution). The particular adaptive learning rate used in the code below is from Barzilai and Borwein. It takes the following form
-
+In the Gradient Descent update formula, the epsilon term is an adaptive learning rate that varies depending on the current point's proximity to the solution (i.e. the learning rate is large if the current point is far away from the solution). The particular adaptive learning rate used in the code below is from Barzilai and Borwein. It takes the following form
 
 $$\epsilon = \frac{\Delta g(x)^{T} \Delta x}{\Delta g(x)^{T} \Delta g(x)}$$
 
@@ -32,8 +32,7 @@ and
 
 $$\Delta x = x^{(i+1)} - x^{(i)}$$
 
-
-Now, let's use gradient descent to solve for the parameters of an OLS regression. Finding these parameters involves minimizing the mean squared error (MSE) or basically, the sum of squared residuals. The formula for the MSE is
+Now, let's use gradient descent to solve for the parameters of an ordinary least squares (OLS) regression. Finding these parameters involves minimizing the mean squared error (MSE) or basically, the sum of squared residuals. The formula for the MSE is
 
 $$MSE = \frac{1}{n}\sum_{i=1}^{n}(y - \hat{y})^2 = \frac{1}{n}\sum_{i=1}^{n}(y - \hat{\beta_{0}} - \hat{\beta_{1}}*x )^2$$
 
@@ -45,15 +44,11 @@ and
 
 $$\frac{dMSE}{d\beta_{1}} = \frac{1}{n}\sum_{i=1}^{n}2*x*(\hat{y} - y)$$
 
+There is a closed-form solution to this MSE minimization ($\hat{\beta} = (X^{T}X)^{-1}X^{T}Y$), which renders the gradient descent irrelevant. Exploring the Gradient Descent algorithm within a relatively simple situation, like linear regression, is beneficial for learning.
 
-There is a closed-form solution to this MSE minimization ($\hat{\beta} = (X^{T}X)^{-1}X^{T}Y$), which renders the gradient descent irrelevant. However, using the linear model situation makes for a clean and clear example that can be easily compared against a known solution.
-
-
-The code for the gradient descent:
-
+A coded example:
 
 Fitting the linear model via the lm R package (for comparison)...
-
 
 ``` r
 
@@ -175,8 +170,6 @@ coefFromGD
     ## [1] -1.816788 46.158869
 
 ```
-
-    
 
 The lines are practically the same!
 

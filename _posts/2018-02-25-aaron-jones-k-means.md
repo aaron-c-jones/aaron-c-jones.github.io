@@ -4,9 +4,7 @@ title: "K-means"
 date: 2018-02-25
 ---
 
-The K-means algorithm:
-
-K-means is a classic clustering algorithm, which means that it falls into the category of unsupervised learning methodologies. It is arguably the most popular and simplest of the clustering algorithms. A trade-off for the simplicity is that the number of clusters needs to be defined in advance of running the algorithm (i.e. the algorithm does not determine the number of clusters to create).
+K-means is a classic clustering algorithm, which means that it falls into the category of unsupervised learning methodologies. It is arguably the most popular and simplest of the clustering algorithms. A trade-off for the simplicity is that the number of clusters needs to be defined in advance of running the algorithm (i.e. the algorithm does not internally determine the number of clusters to create).
 
 The foundamental goal of K-means is to minimize the within cluster sum of squared residuals (WCSS). The objective function, the function to be minimized, takes the following form
 
@@ -22,9 +20,9 @@ and
 
 $$\mu_{j} = \text{the mean of the j-th cluster}$$
 
-The algorithm begins by assigning every observation in the dataset to a cluster at random. Then, the mean of every cluster is computed as well as the distance from each mean to each observation. Next, each observation is reassigned to the cluster to whose center it is closest. Continue this process until the observations don't change clusters.
+The algorithm begins by assigning every observation in the dataset to a cluster at random. Next, the mean of each cluster is computed along with the distance from the aforementioned means to each observation. Each observation is then reassigned to the cluster to whose center it is closest. This process is continued until the observations don't change clusters.
 
-Given that the numbers of clusters can be determined in advance, the K-means algorithm generates reliable results and converges quickly. Knowing the number of clusters a priori is fairly easy if the number of features is 3 or fewer as the visualization of all features simultaneously is possible. With four of more features it becomes more difficult, but not necessarily impossible, to determine the number of clusters.
+Assuming the number of clusters can be determined in advance, the K-means algorithm generates reliable results and converges quickly. Knowing the number of clusters a priori is fairly easy if the number of features is 3 or fewer as the visualization of all features simultaneously is possible. With four of more features it becomes more difficult, but not necessarily impossible, to determine the number of clusters.
 
 In the code below, I compare the R function for K-means to my own K-means function.
 
