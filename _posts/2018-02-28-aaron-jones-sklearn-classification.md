@@ -9,13 +9,17 @@ When undertaking a classification problem, it is commonplace to test multiple al
 This project considers 9 algoirthms (Dummy, Gaussian Naive Bayes, Logistic Regression, Linear Discriminant Analysis, Quadratic Discriminant Analysis, k-Nearest Neighbors, Support Vector Machine, Random Forest, Gradient Boosting) and 7 performance metrics (Accuracy, Sensitivity, Specificity, Positive Predictive Value, Negative Predictive Value, F1, ROC AUC). Despite looking at numerous metrics, the one that I base the tuning (parameter optimization) process on is accuracy. Inside the first 5 performance metric functions, I give the formula for the metric, so I won't go into much detail except to explain TP, TN, FN, and FP.
 
 TP = True Positive. The number of positive class values that were predicted to be positive.
+
 TN = True Negative. The number of negative class values that were predicted to be negative.
+
 FN = False Negative. The number of positive class values that were wrongly predicted to be negative.
+
 FP = False Positive. The number of negative class values that were wrongly predicted to be positive.
 
 The last two metrics (F1 and ROC AUC) are
 
 F1 = A weighted average of precision (Positive Predictive Value) and recall (Sensitivity).
+
 ROC AUC = The area under the ROC curve. The ROC curve is a plot of true positive rate (y-axis) against the false positive rate (x-axis). The closer the ROC AUC is to one, the larger the true positive rate and the smaller the false positive rate, which is the ideal scenario.
 
 If this were an actual modeling project - instead of a fun after hours project - the process of picking a final algorithm would be much more involved, including additional visualizations (not the least of which being the ROC curves) and additional ensembling (will save for another post).
@@ -25,6 +29,7 @@ The algorithms will be briefly explained as we move through the example.
 I start by loading in the needed packages, and defining some functions to help ease the process of tuning and scoring the models.
 
 ```python
+
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy
@@ -162,11 +167,13 @@ def model_fit(algorithm, parameters, data, target):
 
     outputs = (model, data_dictionary, scores)
     return outputs
+
 ```
 
 Next, we load in the data. I've decided to define the malignant observations 1 and the benign observations 0. Note that the feature names have been abbreviated for space by removing the word mean from each variable. So, 'area' should actually be 'area mean.' Also, instead of going through a cumbersome imputation process, I opt to just remove all rows containing missing data.
 
 ```python
+
 cancer = (
     pandas.read_csv(
         '/Users/aaronjones/Classification-example-sklearn-python/BreastCancer.csv',
@@ -184,6 +191,7 @@ cancer = (
 cancer.diag.replace(['M', 'B'], [1, 0], inplace=True)
 cancer.drop(['id'], axis=1, inplace=True)
 cancer.head()
+
 ```
 
 
@@ -301,6 +309,7 @@ cancer.head()
 It's always good practice to visualize the data and compute some basic statistics prior to beginning the modeling. Here, I am interested in the correlation between features in order to identify possible multicollinearity issues.
 
 ```python
+
 plt.figure(figsize=(14, 12))
 plt.title('Pearson Correlation of Features')
 seaborn.heatmap(
@@ -312,16 +321,18 @@ seaborn.heatmap(
   linecolor='white',
   annot=True
 )
+
 ```
 
 
-![png](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_2_1.png)
+![](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_2_1.png)
 
 
 
 I now give one example of a two dimensional scatterplot, which is of 'radius mean' and 'fractal dimension mean.' The two features do separate nicely into malignant and benign groups, albeit some overlap exists.
 
 ```python
+
 scat = seaborn.FacetGrid(
     data=cancer[['radius', 'fractal_dimension', 'diag']],
     hue='diag',
@@ -329,16 +340,18 @@ scat = seaborn.FacetGrid(
 ).map(
     plt.scatter, 'radius', 'fractal_dimension'
 ).add_legend()
+
 ```
 
 
-![png](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_3_0.png)
+![](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_3_0.png)
 
 
 
-One of the biggest struggles in modeling high dimensional data is visualizing all the data simultaneously. One nice way to do this is to use dimensionality reduction algorithms. The first one I employ is Principal Component Analysis. The general idea behind PCA is to use an orthogonal transform to create a series of uncorrelated, linear combinations of the original variables (i.e. principal components). In general, the number of components used in further analysis depends on how many components it takes to explain the majority of the variance in the data. I typically use 80\% as my threshold. In this case, I get to just about 80\% with the first two components. Note that PCA forms the components so that the first one explains the most variance, the second the second most variance, and so on.
+One of the biggest struggles in modeling high dimensional data is visualizing all the data simultaneously. One nice way to do this is to use dimensionality reduction algorithms. The first one I employ is Principal Component Analysis. The general idea behind PCA is to use an orthogonal transform to create a series of uncorrelated, linear combinations of the original variables (i.e. principal components). In general, the number of components used in further analysis depends on how many components it takes to explain the majority of the variance in the data. I typically use 80% as my threshold. In this case, I get to just about 80% with the first two components. Note that PCA forms the components so that the first one explains the most variance, the second the second most variance, and so on.
 
 ```python
+
 x_full, y_full = (
     data_transform(cancer, 'diag', full=True)
 )
@@ -351,6 +364,7 @@ print('Individual % Variance Explained by First Two Components: {0}'
 
 print('Total % Variance Explained by First Two Components: {0}'
       .format(sum(pca.explained_variance_ratio_)))
+
 ```
 
     Individual % Variance Explained by First Two Components: [0.54851522 0.25080488]
@@ -360,6 +374,7 @@ print('Total % Variance Explained by First Two Components: {0}'
 Now, I plot the first two principal components and get another look at the data.
 
 ```python
+
 colors = ['blue', 'red']
 plot_info = zip(colors, [0, 1], ['Benign', 'Malignant'])
 plt.figure()
@@ -370,16 +385,18 @@ for col, i, name in plot_info:
     )
 plt.legend(loc='best', shadow=True, scatterpoints=1)
 plt.title('PCA Cancer Data')
+
 ```
 
 
-![png](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_5_1.png)
+![](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_5_1.png)
 
 
 
 Another dimensionality reduction technique useful in high dimensional data plotting is Multidimensional Scaling (MDS). Unlike PCA, which creates linear combinations of the features, MDS computes the distances between all the observations and puts those observations in a smaller dimensional space while simultaneously maintaining the aforementioned distances. That way it is easier to assess the similarity and or dissimilarity between observations. In this case, I reduced the dimensionality down to both 2 and 3 dimensions. In the 3 dimensional plot, it seems like there may be some separation between classes, despite the bad orientation of the plot, but in 2 dimensions there doesn't seem to be any separation. An interesting phenomenon given the clear separation in the other two plots. 
 
 ```python
+
 mds2 = manifold.MDS(
     n_components=2, metric=False, max_iter=10000, eps=1e-8,
     n_jobs=1, random_state=0, dissimilarity='euclidean'
@@ -418,18 +435,20 @@ plt.suptitle('2D and 3D Multidimensional Scaling Plots')
 plt.axis('tight')
 plt.legend(loc='best', shadow=True, scatterpoints=1)
 plt.show()
+
 ```
 
 
-![png](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_6_0.png)
+![](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_6_0.png)
 
 
 
-To start the modeling, I run a dummy classifier in order to establish an accuracy baseline to which I can compare the more sophisticated algorithms. Notice that while the accuracy is not great, it definitely isn't 50\%. This has to do with the number of each class included in the dataset.
+To start the modeling, I run a dummy classifier in order to establish an accuracy baseline to which I can compare the more sophisticated algorithms. Notice that while the accuracy is not great, it definitely isn't 50%. This has to do with the number of each class included in the dataset.
 
 You'll notice that the results come from two subsets of the data, titled Training and Holdout. The training data is what the model used to tune, while the holdout data is a subset of the data that was held back in order to test the algorithms ability to predict on unseen data. The difference between the numbers says a lot about the quality of the model, including whether or not there is any overfitting.
 
 ```python
+
 dummy_grid = {
     'strategy': ['most_frequent', 'stratified', 'uniform'],
     'random_state': [0]
@@ -440,6 +459,7 @@ dummy_outputs = model_fit(
     parameters=dummy_grid, data=cancer, target='diag'
 )
 dummy_model, dummy_data_dict, dummy_scores = dummy_outputs
+
 ```
 
     Subset: Training
@@ -463,6 +483,7 @@ dummy_model, dummy_data_dict, dummy_scores = dummy_outputs
 Next up, Gaussian Naive Bayes. This is a fairly simple probabilistic classifier, which is based on Bayes' Theorem. The naive component is that all the features are assumed by the classifier to be independent. Even with this simple classifier, the achieved accuracy is far better than that of the dummy classifier.
 
 ```python
+
 gnb_grid = {
     'priors': [None]
 }
@@ -472,6 +493,7 @@ gnb_outputs = model_fit(
     parameters=gnb_grid, data=cancer, target='diag'
 )
 gnb_model, gnb_data_dict, gnb_scores = gnb_outputs
+
 ```
 
     Subset: Training
@@ -495,6 +517,7 @@ gnb_model, gnb_data_dict, gnb_scores = gnb_outputs
 Logistic regression is a robust binary classifier, which belongs to the family of generalized linear models. That is, the discrete response is transformed, in this case using the logit function, to a continuous variable, which can then be modeled linearly. Note that due to the transformation the predictions are no longer particular values, but instead the odds of those particular values.
 
 ```python
+
 lr_grid = {
     'penalty': ['l1', 'l2'],
     'C': numpy.linspace(0.01, 10000, 20),
@@ -506,6 +529,7 @@ logistic_outputs = model_fit(
     parameters=lr_grid, data=cancer, target='diag'
 )
 logistic_model, logistic_data_dict, logistic_scores = logistic_outputs
+
 ```
 
     Subset: Training
@@ -529,6 +553,7 @@ logistic_model, logistic_data_dict, logistic_scores = logistic_outputs
 Linear Discriminant Analysis tries to identify a linear combination of the data that can serve as a linear decision boundary between 2 plus classes. The search for a linear combination makes it similar to PCA. LDA assumes that the conditional probability distributions (i.e. the data given class 1, the data given class 2, etc.) are normally distributed and that all the covariance matrices are identical.
 
 ```python
+
 lda_grid = {
     'solver': ['svd'],
     'store_covariance': [True]
@@ -539,6 +564,7 @@ lda_outputs = model_fit(
     parameters=lda_grid, data=cancer, target='diag'
 )
 lda_model, lda_data_dict, lda_scores = lda_outputs
+
 ```
 
     Subset: Training
@@ -562,6 +588,7 @@ lda_model, lda_data_dict, lda_scores = lda_outputs
 Similar to LDA is Quadratic Discriminant Analysis. The only difference ia that in QDA the covariance matrices are not assumed to be identical. This allows the decision boundary to become more complex.
 
 ```python
+
 qda_grid = {
     'store_covariance': [True]
 }
@@ -571,6 +598,7 @@ qda_outputs = model_fit(
     parameters=qda_grid, data=cancer, target='diag'
 )
 qda_model, qda_data_dict, qda_scores = qda_outputs
+
 ```
 
     Subset: Training
@@ -594,6 +622,7 @@ qda_model, qda_data_dict, qda_scores = qda_outputs
 K-Nearest Neighbors is a very simple, but often times very powerful classifier. The general idea is that the k points nearest the point that is being predicted are pooled to determine said prediction. In general, a simple majority wins. For example, if I set k = 10, I am going to consider the 10 observations closest to my new observation. If 6 of the 10 belong to class 1 and the other 4 to class 0, then the new point would be classified as 1.
 
 ```python
+
 knn_grid = {
     'n_neighbors': numpy.linspace(1, 10, 10).astype(int),
     'weights': ['uniform', 'distance'],
@@ -606,6 +635,7 @@ knn_outputs = model_fit(
     parameters=knn_grid, data=cancer, target='diag'
 )
 knn_model, knn_data_dict, knn_scores = knn_outputs
+
 ```
 
     Subset: Training
@@ -629,6 +659,7 @@ knn_model, knn_data_dict, knn_scores = knn_outputs
 Support Vector Machines are non-probabilistic classifiers, which means that the algorithm decides between the two classes without assigning any probabilities. Here, the data are mapped, using what is called a kernel, into a new space in which the data are linearly separated by as wide a margin as possible. The new observations are classified based on their mappings in the new space. The kernels faciliate the algorithms ability to do non-linear classification as well as linear classification.
 
 ```python
+
 svc_grid = {
     'C': numpy.linspace(0.01, 10000, 20),
     'kernel': ['linear', 'rbf'],
@@ -641,6 +672,7 @@ svc_outputs = model_fit(
     parameters=svc_grid, data=cancer, target='diag'
 )
 svc_model, svc_data_dict, svc_scores = svc_outputs
+
 ```
 
     Subset: Training
@@ -664,6 +696,7 @@ svc_model, svc_data_dict, svc_scores = svc_outputs
 Random forests are an ensembled algorithm built on decision trees. Here, we create B bootstrap (another topic for another day) samples of the original data, which are used to create B decision trees. What separates random forests from the bagging algorithms is that each bootstrapped decision tree is built using a subset of the features. The goal here is to build uncorrelated trees. Note that the process determining the subset of features to be used in each tree is random. While single decision trees tend to overfit, the construction of a whole forest of trees typically corrects for that problem. In the end, the predictions from the individual trees are aggregated to produce the final prediction.
 
 ```python
+
 rf_grid = {
     'n_estimators': [1000],
     'max_features': numpy.linspace(2, cancer.shape[1]-1, 8).astype(int),
@@ -680,6 +713,7 @@ rf_outputs = model_fit(
     parameters=rf_grid, data=cancer, target='diag'
 )
 rf_model, rf_data_dict, rf_scores = rf_outputs
+
 ```
 
     Subset: Training
@@ -703,6 +737,7 @@ rf_model, rf_data_dict, rf_scores = rf_outputs
 And lastly, gradient boosting. Like random forests, grandient boosters are ensemble learners; however, unlike random forests, the decision trees in gradient boosters are built iteratively instead of simultaneously. Each subsequent tree learns to correct the previous tree. In essence, each new tree is focusing on correctly predicting the observations that were incorrectly predicted by the previous tree. The idea being to build a collection of weak learners, which combine to form one strong learner. Gradient boosting algorithms have to be tuned carefully as they can easily overfit the data.
 
 ```python
+
 gb_grid = {
     'learning_rate': [0.01],
     'n_estimators': [500],
@@ -716,6 +751,7 @@ gb_outputs = model_fit(
     parameters=gb_grid, data=cancer, target='diag'
 )
 gb_model, gb_data_dict, gb_scores = gb_outputs
+
 ```
 
     Subset: Training
@@ -737,6 +773,7 @@ gb_model, gb_data_dict, gb_scores = gb_outputs
 
 
 ```python
+
 scores_list = [
     dummy_scores, gnb_scores, logistic_scores, lda_scores,
     qda_scores, knn_scores, svc_scores, rf_scores, gb_scores
@@ -758,9 +795,10 @@ holdout_stats['Algorithms'] = [
 ]
 
 print(holdout_stats)
+
 ```
 
-The table below shows the holdout metrics for each of the 9 algorithms. Using accuracy, the winning algorithm for this dataset is Linear Discriminant Analysis. It turns out that this algorithm got 94\% accuracy on the training data, which, since the holdout accuracy is 93\%, means that the algorithm is stable and not overfitting. In reality, all of the algorithms, with the exception of the dummy classifier, perform very well on this dataset. It turns out this dataset didn't, on this basic level, provide any real challenges, but certainly not all datasets will be this way!
+The table below shows the holdout metrics for each of the 9 algorithms. Using accuracy, the winning algorithm for this dataset is Linear Discriminant Analysis. It turns out that this algorithm got 94% accuracy on the training data, which, since the holdout accuracy is 93%, means that the algorithm is stable and not overfitting. In reality, all of the algorithms, with the exception of the dummy classifier, perform very well on this dataset. It turns out this dataset didn't, on this basic level, provide any real challenges, but certainly not all datasets will be this way!
 
        Accuracy  Sensitivity  Specificity   PPV   NPV  F1 Score  ROC AUC Score                       Algorithms
     0      0.60         0.00         1.00   NaN  0.60      0.00           0.50                            Dummy
