@@ -325,7 +325,7 @@ seaborn.heatmap(
 ```
 
 
-![](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_2_1.png)
+![](/images/2018-02-28-aaron-jones-sklearn-classification_files/figure-markdown_github/output_2_1.png)
 
 
 
@@ -344,7 +344,7 @@ scat = seaborn.FacetGrid(
 ```
 
 
-![](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_3_0.png)
+![](/images/2018-02-28-aaron-jones-sklearn-classification_files/figure-markdown_github/output_3_0.png)
 
 
 
@@ -389,7 +389,7 @@ plt.title('PCA Cancer Data')
 ```
 
 
-![](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_5_1.png)
+![](/images/2018-02-28-aaron-jones-sklearn-classification_files/figure-markdown_github/output_5_1.png)
 
 
 
@@ -439,7 +439,7 @@ plt.show()
 ```
 
 
-![](/images/2018-02-24-aaron-jones-sklearn-classification_files/figure-markdown_github/output_6_0.png)
+![](/images/2018-02-28-aaron-jones-sklearn-classification_files/figure-markdown_github/output_6_0.png)
 
 
 
