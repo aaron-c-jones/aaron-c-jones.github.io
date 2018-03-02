@@ -6,9 +6,9 @@ date: 2018-02-28
 
  This post is fun with classification using Python's sklearn library. Running multiple algorithms is commonplace in machine learning/statistics as a way to insure that
 
- 1. the best possible performance is being achieved<br/>
- 2. to validate the results<br/>
- 3. to identify potential modeling pitfalls
+ 1) the best possible performance is being achieved<br/>
+ 2) to validate the results<br/>
+ 3) to identify potential modeling pitfalls
 
  To clarify, the goal of classification algorithms is to place observations (i.e. collections of measurements and characteristics describing something) into one of k classes. Sklearn (or scikit-learn) includes numerous classification algorithms making it fairly easy to do the type of algorithm testing done below. I had some fun trying to classify tumors as benign or malignant (meaning breast cancer) using several features quantifying the key characteristics of the tumor.
 
