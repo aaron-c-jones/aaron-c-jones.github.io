@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Sklearn Classification"
+title: "Classification with sklearn"
 date: 2018-02-28
 ---
 

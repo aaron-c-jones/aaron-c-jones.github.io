@@ -93,7 +93,7 @@ ax4.annotate('10000 Tosses', [5000, 0.9])
 ![](/images/2018-03-06-aaron-jones-fun-with-python_files/figure-markdown_github/output_2_1.png)
 
 
-The random walk is actually quite similar to the cumulative moving average. The main difference being that instead of averaging after every new entry, the data is summed. Random walks are the basis of many sampling and search algorithms because they are simple and surprisingly effective means of exploring a space. As the steps are random, the random walk is not as efficient as more elaborate algorithms where the steps can be adjusted to faciliate a faster and more thorough exploration of the space. Despite its inefficiencies, the algorithm is desirable because it's simple and easy to code.
+The random walk is actually quite similar to the cumulative moving average. The main difference being that instead of averaging after every new entry, the data is summed. Random walks are the basis of many sampling and search algorithms because they are simple and surprisingly effective means of exploring a space. As the steps are random, the random walk is not as efficient as more elaborate algorithms where the steps can be adjusted to facilitate a faster and more thorough exploration of the space. Despite its inefficiencies, the algorithm is desirable because it's simple and easy to code.
 
 ```python
 
