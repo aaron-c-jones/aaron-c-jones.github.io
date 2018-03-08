@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Regularized Regression Coefficients"
-date: 2018-03-04
+date: 2018-03-07
 ---
 
 I use regularized regressions, be it Lasso, Ridge, or Elastic Net, frequently. It is critical and interesting to understand the relative behavior of the coefficients across methodologies. In order to compare the coefficients, I first derive the formulation of the coefficients for both Ridge, which has a nice closed form solution. The LASSO solution I will simply state for the time being. For simplicity, I assume that $\boldsymbol{X}$, the matrix of features, is $\boldsymbol{I}_{nxn}$, the identity matrix (1s on the diagonal, 0s everywhere else). All of the derivations are done using matrix notation.
@@ -18,10 +18,12 @@ $$minimize_{\boldsymbol{\beta}}\Big((\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\b
 
 To minimize, I take the derivative with respect to $\boldsymbol{\beta}$, set equal to zero, and solve. Starting with the derivative...
 
+$$
 \begin{aligned}
 \frac{dPRSS}{d\boldsymbol{\beta}}&=-\boldsymbol{X}^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})-(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})^{T}\boldsymbol{X}+\lambda(\boldsymbol{I}^{T}\boldsymbol{\beta}+\boldsymbol{\beta}^{T}\boldsymbol{I})\\
 &=-2\boldsymbol{X}^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})+2\lambda\boldsymbol{I}\boldsymbol{\beta}
 \end{aligned}
+$$
 
 Setting the derivative equal to zero and solving...
 
@@ -41,6 +43,7 @@ $$\hat{\boldsymbol{\beta}}=(\boldsymbol{X}^{T}\boldsymbol{X}+\lambda\boldsymbol{
 
 Using the simplicity assumption (i.e. the identity matrix), I replace $\boldsymbol{X}$ and simplify to get the solution that will be the basis of the forthcoming explorations.
 
+$$
 \begin{aligned}
 \hat{\boldsymbol{\beta}}&=(\boldsymbol{X}^{T}\boldsymbol{X}+\lambda\boldsymbol{I})^{-1}\boldsymbol{X}^{T}\boldsymbol{Y}\\
 &\rightarrow (\boldsymbol{I}^{T}\boldsymbol{I}+\lambda\boldsymbol{I})^{-1}\boldsymbol{I}^{T}\boldsymbol{Y}\\
@@ -49,6 +52,7 @@ Using the simplicity assumption (i.e. the identity matrix), I replace $\boldsymb
 &=\frac{1}{1-\lambda}\boldsymbol{I}\boldsymbol{Y}\\
 &=\begin{bmatrix}\frac{y_{1}}{1-\lambda} \\ \vdots \\ \frac{y_{n}}{1-\lambda}\end{bmatrix}
 \end{aligned}
+$$
 
 The Ridge regression parameters, under my assumption, take the following form...
 
@@ -79,6 +83,7 @@ $$i=1,\dots,n$$
 
 And, finally, the solution to ordinary least squares (OLS) regression has the following solution given the simplicity assumption.
 
+$$
 \begin{aligned}
 \hat{\boldsymbol{\beta}}&=(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}\boldsymbol{X}^{T}\boldsymbol{Y}\\
 &\rightarrow (\boldsymbol{I}^{T}\boldsymbol{I})^{-1}\boldsymbol{I}^{T}\boldsymbol{Y}\\
@@ -88,6 +93,7 @@ And, finally, the solution to ordinary least squares (OLS) regression has the fo
 &=\boldsymbol{Y}\\
 &=\begin{bmatrix}y_{1} \\ \vdots \\ y_{n}\end{bmatrix}
 \end{aligned}
+$$
 
 So, the OLS coefficients are...
 
