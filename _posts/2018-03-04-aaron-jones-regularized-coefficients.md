@@ -4,11 +4,11 @@ title: "Regularized Regression Coefficients"
 date: 2018-03-07
 ---
 
-I use regularized regressions, be it Lasso, Ridge, or Elastic Net, frequently. It is critical and interesting to understand the relative behavior of the coefficients across methodologies. In order to compare the coefficients, I first derive the formulation of the coefficients for both Ridge, which has a nice closed form solution. The LASSO solution I will simply state for the time being. For simplicity, I assume that $\boldsymbol{X}$, the matrix of features, is $\boldsymbol{I}_{nxn}$, the identity matrix (1s on the diagonal, 0s everywhere else). All of the derivations are done using matrix notation.
+I use regularized regressions, be it Lasso, Ridge, or Elastic Net, frequently. It is critical and interesting to understand the relative behavior of the coefficients across methodologies. In order to compare the coefficients, I first derive the formulation of the coefficients for Ridge regression, which has a nice closed form solution. I will simply state the Lasso solution for the time being. For simplicity, I assume that $\boldsymbol{X}$, the matrix of features, is $\boldsymbol{I}_{nxn}$, the identity matrix (1s on the diagonal, 0s everywhere else). All of the derivations are done using matrix notation.
 
 Let PRSS = Penalized Residual Sum of Squares (i.e. the expression that is going to be minimized).
 
-Starting with Ridge regression whose penalization term features the square of the coefficients.
+Here is the PRSS for Ridge regression.
 
 $$PRSS=(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})+\lambda\boldsymbol{\beta}^{T}\boldsymbol{\beta}$$
 
@@ -81,7 +81,7 @@ $$\hat{\beta}_{i}^{lasso}=
 
 $$i=1,\dots,n$$
 
-And, finally, the solution to ordinary least squares (OLS) regression has the following solution given the simplicity assumption.
+And finally, the solution to ordinary least squares (OLS) regression has the following solution given the simplicity assumption.
 
 $$
 \begin{aligned}
@@ -100,6 +100,8 @@ So, the OLS coefficients are...
 $$\hat{\beta}_{i}^{ols}=y_{i}$$
 
 $$i=1,\dots,n$$
+
+In this first section of code, I am plotting the coefficient values with respect to lambda, the penalization parameter. The coefficients become smaller as the value for lambda grows. In other words, as the amount of penalization increases. As expected, given the power of two in the penalization term, the Ridge coefficients decrease or increase exponentially toward zero as lambda increases. Notice that the coefficients, besides the coefficient that starts at zero, don't every get to zero. This is because Ridge regression is not a selection operator, it is strictly a shrinkage methodology. In practice, while the coefficients don't ever become zero, they can get quite close to zero. In the Lasso regression case, the coefficients linearly decrease or increase to zero at which point the coefficients become zero. Lasso is principally a selection operator, its goal is to remove variables. Knowing these behaviors is key to being able to select the proper algorithm for a given problem.
 
 ```python
 
@@ -178,6 +180,7 @@ fig.text(0.5, 0.01, 'Lambda', ha='center', va='center')
 ![](/images/2018-03-04-aaron-jones-regularized-coefficients_files/figure-markdown_github/output_5_1.png)
 
 
+In this next chunk, the coefficients are being plotted with respect to the y values given a constant lambda (here, lambda equals 2). As expected, the OLS y to coefficient relationship is linear with a slope of one. The Ridge relationship, because it is strictly a shrinkage methodology, is also linear, but with a slope less than one. The Ridge coefficients are closer to zero on both the positive and negative side than the OLS coefficients. Lastly, the Lasso coefficients have a linear behavior unless the y value is between $-\lambda/2$ and $\lambda/2$, in this case -1 and 1, in which case the coefficients are zero. However, at the start, the Lasso coefficients are closer to zero than the OLS coefficients, but not as close to zero as the Ridge coefficients. To reiterate, understanding how the regression coefficients behave in each of these methodologies is important when attempting to apply these regressions to actual problems.
 
 ```python
 
@@ -226,6 +229,8 @@ for index, column in enumerate(lambda1_df.columns[1:]):
         lambda1_df['y'], lambda1_df[column],
         color = colors[index], label = column
     )
+plt.xlabel('Y')
+plt.ylabel('Coefficient')
 plt.legend()
 
 ```
