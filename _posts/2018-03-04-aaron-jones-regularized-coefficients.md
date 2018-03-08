@@ -18,17 +18,21 @@ $$minimize_{\boldsymbol{\beta}}\Big((\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\b
 
 To minimize, I take the derivative with respect to $\boldsymbol{\beta}$, set equal to zero, and solve. Starting with the derivative...
 
-\begin{align*}
+\begin{aligned}
 \frac{dPRSS}{d\boldsymbol{\beta}}&=-\boldsymbol{X}^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})-(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})^{T}\boldsymbol{X}+\lambda(\boldsymbol{I}^{T}\boldsymbol{\beta}+\boldsymbol{\beta}^{T}\boldsymbol{I})\\
 &=-2\boldsymbol{X}^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})+2\lambda\boldsymbol{I}\boldsymbol{\beta}
-\end{align*}
+\end{aligned}
 
 Setting the derivative equal to zero and solving...
 
-$$-2\boldsymbol{X}^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})+2\lambda\boldsymbol{I}\boldsymbol{\beta}=0$$<br/>
-$$\boldsymbol{X}^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})=\lambda\boldsymbol{I}\boldsymbol{\beta}$$<br/>
-$$\boldsymbol{X}^{T}\boldsymbol{Y}-\boldsymbol{X}^{T}\boldsymbol{X}\boldsymbol{\beta}=\lambda\boldsymbol{I}\boldsymbol{\beta}$$<br/>
-$$\boldsymbol{X}^{T}\boldsymbol{Y}=\boldsymbol{X}^{T}\boldsymbol{X}\boldsymbol{\beta}+\lambda\boldsymbol{I}\boldsymbol{\beta}$$<br/>
+$$-2\boldsymbol{X}^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})+2\lambda\boldsymbol{I}\boldsymbol{\beta}=0$$
+
+$$\boldsymbol{X}^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})=\lambda\boldsymbol{I}\boldsymbol{\beta}$$
+
+$$\boldsymbol{X}^{T}\boldsymbol{Y}-\boldsymbol{X}^{T}\boldsymbol{X}\boldsymbol{\beta}=\lambda\boldsymbol{I}\boldsymbol{\beta}$$
+
+$$\boldsymbol{X}^{T}\boldsymbol{Y}=\boldsymbol{X}^{T}\boldsymbol{X}\boldsymbol{\beta}+\lambda\boldsymbol{I}\boldsymbol{\beta}$$
+
 $$\boldsymbol{X}^{T}\boldsymbol{Y}=(\boldsymbol{X}^{T}\boldsymbol{X}+\lambda\boldsymbol{I})\boldsymbol{\beta}$$
 
 The general solution...
@@ -37,18 +41,20 @@ $$\hat{\boldsymbol{\beta}}=(\boldsymbol{X}^{T}\boldsymbol{X}+\lambda\boldsymbol{
 
 Using the simplicity assumption (i.e. the identity matrix), I replace $\boldsymbol{X}$ and simplify to get the solution that will be the basis of the forthcoming explorations.
 
-\begin{align*}
+\begin{aligned}
 \hat{\boldsymbol{\beta}}&=(\boldsymbol{X}^{T}\boldsymbol{X}+\lambda\boldsymbol{I})^{-1}\boldsymbol{X}^{T}\boldsymbol{Y}\\
 &\rightarrow (\boldsymbol{I}^{T}\boldsymbol{I}+\lambda\boldsymbol{I})^{-1}\boldsymbol{I}^{T}\boldsymbol{Y}\\
 &=(\boldsymbol{I}+\lambda\boldsymbol{I})^{-1}\boldsymbol{I}\boldsymbol{Y}\\
 &=((1-\lambda)\boldsymbol{I})^{-1}\boldsymbol{Y}\\
 &=\frac{1}{1-\lambda}\boldsymbol{I}\boldsymbol{Y}\\
 &=\begin{bmatrix}\frac{y_{1}}{1-\lambda} \\ \vdots \\ \frac{y_{n}}{1-\lambda}\end{bmatrix}
-\end{align*}
+\end{aligned}
 
 The Ridge regression parameters, under my assumption, take the following form...
 
-$$\hat{\beta}_{i}^{ridge}=\frac{y_{i}}{1-\lambda}$ where $i=1,\dots,n$$
+$$\hat{\beta}_{i}^{ridge}=\frac{y_{i}}{1-\lambda}$$
+
+$$i=1,\dots,n$$
 
 In the grand calculus tradition, I confirm that the parameters indeed minimize the PRSS by taking the second derivative and confirming that it is strictly greater than zero.
 
@@ -61,18 +67,19 @@ $$PRSS=(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})^{T}(\boldsymbol{Y}-\bol
 Under the simplicity assumption stated previous, the Lasso solution is...
 
 $$\hat{\beta}_{i}^{lasso}=
-\[   \left\{
+\left\{
 \begin{array}{ll}
       y_{i}+\lambda/2 & y_{i}<-\lambda/2\\
       0 & |y_{i}|\leq \lambda/2 \\
       y_{i}-\lambda/2 & y_{i}>\lambda/2\\
 \end{array} 
-\right. \]$$
+\right.$$
+
 $$i=1,\dots,n$$
 
 And, finally, the solution to ordinary least squares (OLS) regression has the following solution given the simplicity assumption.
 
-\begin{align*}
+\begin{aligned}
 \hat{\boldsymbol{\beta}}&=(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}\boldsymbol{X}^{T}\boldsymbol{Y}\\
 &\rightarrow (\boldsymbol{I}^{T}\boldsymbol{I})^{-1}\boldsymbol{I}^{T}\boldsymbol{Y}\\
 &=(\boldsymbol{I})^{-1}\boldsymbol{I}\boldsymbol{Y}\\
@@ -80,11 +87,13 @@ And, finally, the solution to ordinary least squares (OLS) regression has the fo
 &=\boldsymbol{I}\boldsymbol{Y}\\
 &=\boldsymbol{Y}\\
 &=\begin{bmatrix}y_{1} \\ \vdots \\ y_{n}\end{bmatrix}
-\end{align*}
+\end{aligned}
 
 So, the OLS coefficients are...
 
-$$\hat{\beta}_{i}^{ols}=y_{i}$ where $i=1,\dots,n$$
+$$\hat{\beta}_{i}^{ols}=y_{i}$$
+
+$$i=1,\dots,n$$
 
 ```python
 
