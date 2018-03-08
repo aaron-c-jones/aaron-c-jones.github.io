@@ -68,7 +68,7 @@ Here is the PRSS for Lasso (Least Absolute Shrinkage and Selection Operator) reg
 
 $$PRSS=(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})^{T}(\boldsymbol{Y}-\boldsymbol{X}\boldsymbol{\beta})+\lambda||\boldsymbol{\beta}||_{1}$$
 
-Under the simplicity assumption stated previous, the Lasso solution is...
+Under the simplicity assumption stated previously, the Lasso solution is...
 
 $$\hat{\beta}_{i}^{lasso}=
 \left\{
@@ -101,7 +101,7 @@ $$\hat{\beta}_{i}^{ols}=y_{i}$$
 
 $$i=1,\dots,n$$
 
-In this first section of code, I am plotting the coefficient values with respect to lambda, the penalization parameter. The coefficients become smaller as the value for lambda grows. In other words, as the amount of penalization increases. As expected, given the power of two in the penalization term, the Ridge coefficients decrease or increase exponentially toward zero as lambda increases. Notice that the coefficients, besides the coefficient that starts at zero, don't every get to zero. This is because Ridge regression is not a selection operator, it is strictly a shrinkage methodology. In practice, while the coefficients don't ever become zero, they can get quite close to zero. In the Lasso regression case, the coefficients linearly decrease or increase to zero at which point the coefficients become zero. Lasso is principally a selection operator, its goal is to remove variables. Knowing these behaviors is key to being able to select the proper algorithm for a given problem.
+In this first section of code, I am plotting the coefficient values with respect to lambda, the penalization parameter. The coefficients become smaller as the value for lambda grows. In other words, as the amount of penalization increases. As expected, given the power of two in the penalization term, the Ridge coefficients decrease or increase exponentially toward zero as lambda increases. Notice that the coefficients, besides the coefficient that starts at zero, don't ever get to zero. This is because Ridge regression is not a selection operator, it is strictly a shrinkage methodology. In practice, while the coefficients don't ever become zero, they can get quite close to zero. In the Lasso regression case, the coefficients linearly decrease or increase to zero at which point the coefficients become zero. Lasso is principally a selection operator, its goal is to remove variables.
 
 ```python
 
