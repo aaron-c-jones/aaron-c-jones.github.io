@@ -101,7 +101,7 @@ plot_map(total, 'All Street Crime')
 
 ```
 
-![](2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-3-2.png)
+![](/images/2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-3-2.png)
 
 ``` r
 
@@ -109,7 +109,7 @@ plot_map(bike, 'Bike Thefts')
 
 ```
 
-![](2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-4-2.png)
+![](/images/2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-4-2.png)
 
 Many of the spatial statistics methodologies require an outline of the geographical area of interest, otherwise known as the space, that can be traced and from which measurements can be made.
 
@@ -127,7 +127,7 @@ plot_outline("city-of-london-trace.jpg")
 
 ```
 
-![](2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](/images/2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 Using the locator command, a trace of the outline can be made, which will faciliate the more detailed analyses. I traced the outline once and saved it in order to prevent the need to do the tracing process multiple times.
 
@@ -189,7 +189,7 @@ points(points[, 1], points[, 2], cex = 0.2)
 
 ```
 
-![](2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](/images/2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 As previously mentioned, this data includes three months of data, which means there exist in the dataset three realizations of monthly bike thefts. It is commonplace in statistics to summarize the data at head by using a measure of central tendency (i.e. mean or median), the prototyping analysis done below can be thought of as a measure of central tendency, akin to the median, for multi-realized spatial data. In the case of the bike theft data, the goal is to find the prototypical (i.e. typical) month of bike thefts. The prototypical month is essentially the arrangement of points that has the minimum 'distance' to each realization. Despite the reference to distance, the prototypical scenario isn't found using standard distance measures. Instead, the distance measure is defined as the least total penalty required to transform the ith realization into the jth realization. The three transforms, having three corresponding penalties, that can be employed are: 1. adding a point to the ith realization (penalty = $p_{a}$), 2. removing a point from the ith realization (penalty = $p_{d}$), and 3. the coordinates of a point may be shifted with a penalty that is proportional to the magnitude of the shift (penalty = $\sigma_{s}p_{m}$). The relationship between the penalties is $\sigma_{s}p_{m}=p_{a}+p_{d}$. I plotted the prototypical month (the large, black dots) with the original data (the small, colorful dots). The only issue here is that it looks like one of the points included in the prototypical month is in the Thames river - perhaps it's just really close to the river! Given the prototypical month, it appears that there is neither clustering - no bike theft hotspots - nor any meaningful inhomogeneity. Conclusion: the data seem reasonably homogeneous.
 
@@ -225,7 +225,7 @@ proto_bike = plot_prototypical_month(bike)
 
 ```
 
-![](2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](/images/2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
 The second analysis is kernel density estimation, which provides insight into the frequency of occurrence across the whole space. Knowing how the frequency of occurrence changes, or for that matter doesn't change, across the space can also help determine whether any clustering or inhomogeneity exists. There are two major components of kernel density estimation. The first is the choice of kernel. This type of estimation is fairly robust to the choice of kernel with the gaussian kernel working well in most cases. The second component is the kernel bandwidth (essentially the kernel width), which can have an enormous effect of the results. This bandwidth is estimated by optimizing the psuedo-log-likelihood. The likelihood is essentially the product of the probability of getting points where they occurred and the probability of not getting points where they didn't occur. For this kernel density estimation, I look only at the total street crime for the month of April 2016. Despite the color gradient, there is very little change in the frequency of occurrence across the space. The frequency, in each of the discretized subspaces, fluctuates between 0.2 and 1.4. So, the magnitude of street crime in April 2016 is both low and consistent. This is impressive given the scale of the London metropolitan area.
 
@@ -357,6 +357,6 @@ lines(outline_coords)
 
 ```
 
-![](2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](/images/2018-03-16-aaron-jones-london-street-crime_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 Thanks for reading!
