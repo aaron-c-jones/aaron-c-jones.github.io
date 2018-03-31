@@ -41,15 +41,3 @@ ul.posts {
 ul.posts li {
     list-style: none;
 }
-
-.wrap
-{
-background-image:url(images/blog_cover_image);
-width:1035px;
-height:200px;
-}
-.text_over_image
-{
-text-align:center;
-line-height:200px;
-}
