@@ -181,9 +181,10 @@ This chunk of code takes the existing index of the data, shuffles it, and divide
 
 ```python
 
+number_of_folds = 10
 index = list(range(income_data.shape[0]))
 index_shuffled = random.sample(index, len(index))
-fold_size = int(math.ceil(len(index_shuffled) / 10))
+fold_size = int(math.ceil(len(index_shuffled) / number_of_folds))
 list_of_folds = [
     index_shuffled[i:i + fold_size]
     for i in range(0, len(index_shuffled), fold_size)
