@@ -13,6 +13,7 @@ nav ul li, footer ul li {
     margin-right: 20px;
 }
 a {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     text-decoration: none;
     color: #999;
 }
@@ -20,10 +21,12 @@ a:hover {
     text-decoration: underline;
 }
 h1 {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     font-size: 3em;
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
 }
 p {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     font-size: 1.5em;
     line-height: 1.4em;
     color: #333;
