@@ -175,7 +175,7 @@ The data has over 30,000 rows and over 100 features (previously called variables
     (30162, 105)
     0.2489
 
-Now to run the CV...
+Now to run the CV.
 
 This chunk of code takes the existing index of the data, shuffles it, and divides it up into 10 folds of roughly equal size. Thus, I am here performing 10-fold CV. What is returned from this code is a list of lists of indices (indices idenifying which rows are assigned to which folds) from which the training and testing sets can be built.
 
