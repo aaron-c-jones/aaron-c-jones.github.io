@@ -1,4 +1,5 @@
 body {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     margin: 60px auto;
     width: 70%;
 }
@@ -40,10 +41,12 @@ footer {
 }
 
 ul.posts { 
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     margin: 20px auto 40px; 
     font-size: 1.5em;
 }
 
 ul.posts li {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     list-style: none;
 }
