@@ -192,7 +192,7 @@ list_of_folds = [
 
 ```
 
-Here, we loop through the list of lists giving each list in the list the opportunity to be the test, sometimes called holdout, data set. As mentioned before, for each selected fold we are able to use the remaining, in this case nine, folds to build the training data set. Next, the model is fitted on said training data and then used to predict the holdout data. In this case, I also predict on the data used to build the model. Lastly, the accuracy score is calculated and added to the appropriate results dictionary.
+Here, we loop through the list of lists giving each list in the list the opportunity to be the test, sometimes called holdout, data set. As mentioned before, for each selected fold we are able to use the remaining, in this case nine, folds to build the training data set. Next, the model is fit on said training data and then used to predict the holdout data. In this case, I also predict on the data used to build the model. Lastly, the accuracy score is calculated and added to the appropriate results dictionary.
 
 ```python
 
