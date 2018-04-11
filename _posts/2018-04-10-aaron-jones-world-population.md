@@ -10,11 +10,11 @@ As might be expected, the two fastest grouping regions are Asia and Oceania, and
 
 ![](/images/2018-04-10-aaron-jones-world-population_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
-This plot shows the year to year percent change in the population of the major global regions. Interestingly the overall trend of the percent change is decreasing, which means that, at least through 2010, the population of these regions is growing at a slower rate. Expect for the Middle East whose percent change fluctuates wildly, the percent changes are quite stable.
+This plot shows the year to year percent change in the population of the major global regions. Interestingly the overall trend of the percent change is decreasing, which means that, at least through 2010, the population of these regions is growing at a slower rate. Except for the Middle East whose percent change fluctuates wildly, the percent changes are quite stable.
 
 ![](/images/2018-04-10-aaron-jones-world-population_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
-Now, I plot the most populous countries as a scatterplot of their populations in 1980 and 2010. The labels further identify the most populous countries by region to which they belong. Of the 9 labeled countries, 5 are members of the Asia and Oceania region, which, given that that region is the most populous besides the world itself, is not a radical realization. In this plot, the former U.S.S.R. is the third most populous country, but since its dissolving, it has fallen down the most populous country ladder and the third spot has been taken by the United States.
+Now, I plot the most populous countries as a scatterplot of their populations in 1980 and 2010. The labels further identify the most populous countries by the region to which they belong. Of the 9 labeled countries, 5 are members of the Asia and Oceania region, which, given that that region is the most populous besides the world itself, is not a radical realization. In this plot, the former U.S.S.R. is the third most populous country, but since its dissolving, it has fallen down the most populous country ladder and the third spot has been taken by the United States.
 
 ![](/images/2018-04-10-aaron-jones-world-population_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
@@ -32,7 +32,7 @@ I also plotted up the 9 countries whose populations in 2010 were less than their
 
 ![](/images/2018-04-10-aaron-jones-world-population_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
-Lastly, I've visualized the populations of all countries in 2010 in a map-based scatterplot. The larger the point, the larger the population. The points representing the two largest countries, China and India, dominate. What this visualization drives home is how big the difference is between the populations of China and India, and that of the US, which is the third most populous country in 2010.
+Lastly, I've visualized the populations of all countries in 2010 in a map-based scatterplot. The larger the point, the larger the population. The points representing the two largest countries, China and India, dominate. What this visualization drives home is how big the difference is between the populations of China and India, and that of the US, which was the third most populous country in 2010.
 
 ![](/images/2018-04-10-aaron-jones-world-population_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
