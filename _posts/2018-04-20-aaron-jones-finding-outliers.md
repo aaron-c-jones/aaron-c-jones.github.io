@@ -70,7 +70,7 @@ ggplot(data, aes(V1, V2)) +
 
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](images/2018-04-20-aaron-jones-finding-outliers_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 ``` r
 
@@ -82,7 +82,7 @@ ggplot(melt(just_numerical), aes(value)) +
 
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-2-2.png)
+![](images/2018-04-20-aaron-jones-finding-outliers_files/figure-markdown_github/unnamed-chunk-2-2.png)
 
 ``` r
 
@@ -97,7 +97,7 @@ grid.arrange(v1v4, v2v4, ncol = 1)
 
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-2-3.png)
+![](images/2018-04-20-aaron-jones-finding-outliers_files/figure-markdown_github/unnamed-chunk-2-3.png)
 
 ``` r
 
@@ -112,7 +112,7 @@ grid.arrange(v1v5, v2v5, ncol = 1)
 
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-2-4.png)
+![](images/2018-04-20-aaron-jones-finding-outliers_files/figure-markdown_github/unnamed-chunk-2-4.png)
 
 ``` r
 
@@ -127,7 +127,7 @@ grid.arrange(v1v6, v2v6, ncol = 1)
 
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-2-5.png)
+![](images/2018-04-20-aaron-jones-finding-outliers_files/figure-markdown_github/unnamed-chunk-2-5.png)
 
 ``` r
 
@@ -142,7 +142,7 @@ grid.arrange(v1v7, v2v7, ncol = 1)
 
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-2-6.png)
+![](images/2018-04-20-aaron-jones-finding-outliers_files/figure-markdown_github/unnamed-chunk-2-6.png)
 
 ``` r
 
@@ -330,7 +330,7 @@ lmV1$plt
 
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](images/2018-04-20-aaron-jones-finding-outliers_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 ``` r
 
@@ -348,7 +348,7 @@ lmV2$plt
 
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-7-2.png)
+![](images/2018-04-20-aaron-jones-finding-outliers_files/figure-markdown_github/unnamed-chunk-7-2.png)
 
 The final two methodologies are model-based. First, linear regression and Cook's distance. Cook's distance is a measure of how influential any given point is on the regression model. It is defined as the sum of all changes in the regression model when any one observation is removed. Here, I regressed each numerical variable separately on the remaining data.
 
@@ -380,7 +380,7 @@ method_clust(just_numerical)
 
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](images/2018-04-20-aaron-jones-finding-outliers_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
     ## $Table
     ## hc_cut
