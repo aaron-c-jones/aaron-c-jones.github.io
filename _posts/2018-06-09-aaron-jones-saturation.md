@@ -48,18 +48,18 @@ ggplot(data_melted, aes(value, kpi, col = variable)) +
 
 ```
 
-![](/images/2018-06-09-aaron-jones-saturation/figure-markdown_github/unnamed-chunk-2-1.png)
+![](/images/2018-06-09-aaron-jones-saturation_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 To find the curve, I use the spherical model, which is the name of the mathematical form of the curve. The parameters of the spherical model will be found using non-linear least squares.
 
 The spherical model takes the following form:
 
-\[ y =  \left\{
+$$y =  \left\{
 \begin{array}{ll}
       c_{0} + c_{1}\Bigg(\frac{3}{2}\frac{|x|}{r} - \frac{1}{2}\bigg(\frac{|x|}{r}\bigg)^{3}\Bigg) & x\leq r \\
       c_{0} + c_{1} & x > r \\
 \end{array} 
-\right. \]
+\right.$$
 
 In spatial statistics, $c_{1}$ is the sil, $c_{0}$ is the y-intercept, and $r$ is the range. Range becomes the saturation point and the combination of the y-intercept and sil becomes the value of the KPI at the saturation point in this non-spatial context. The non-linear least squares algorithm finds the optimal sil, y-intercept, and range. The initial values used in the algorithm were found by looking at the above visualization and approximating the parameter values. The output consists of the joint y-intercept and sil, and range values, a visualization of the saturation point, and the trace information from the parameter optimization.
 
@@ -159,7 +159,7 @@ fit_n_plot(data[, .(kpi, channel1)], 'channel1', int_init = 1e+05, sil_init = 4e
     ##      Channel (Range) = 22331718.74
     ##      KPI (Y-Intercept + Sil) = 4427826.09
 
-![](/images/2018-06-09-aaron-jones-saturation/figure-markdown_github/unnamed-chunk-3-1.png)
+![](/images/2018-06-09-aaron-jones-saturation_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 ``` r
 
@@ -180,6 +180,6 @@ fit_n_plot(data[, .(kpi, channel2)], 'channel2', int_init = 1e+05, sil_init = 5e
     ##      Channel (Range) = 79305398.55
     ##      KPI (Y-Intercept + Sil) = 5158440.21
 
-![](/images/2018-06-09-aaron-jones-saturation/figure-markdown_github/unnamed-chunk-4-1.png)
+![](/images/2018-06-09-aaron-jones-saturation_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 Thanks for reading!
